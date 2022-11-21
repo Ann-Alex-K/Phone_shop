@@ -1,0 +1,85 @@
+:root {
+    --color-primary: #ffffff;
+    --color-secondary: #ffeb39;
+    --color-gray: #4b4c50;
+    --color-dark-gray: #bbbcbf;
+    --color-black: #121212;
+    --color-light-gray: #121214;
+    --color-dark-blue: #1b1f27;
+}
+
+body {
+    background-color: var(--color-dark-blue);
+}
+
+.product-title {
+    margin-top: 24px;
+    min-height: 70px;
+}
+
+.block {
+    width: 300px;
+}
+
+.product-img {
+    width: 170px;
+    height: 300px;
+    margin: 24px;
+}
+
+.dropdown-menu {
+    background-color: #121214;
+}
+
+.dropdown-item {
+    color: #bbbcbf;
+}
+
+.custom-button-style {
+    background-color: var(--color-secondary);
+    border-color: var(--color-secondary);
+    color: var(--color-black);
+}
+ 
+.addtocart {
+    margin: 24px;
+}
+
+.blockCat {
+    width: 600px;
+}
+
+.categories-img {
+    width: 300px;
+    height: 300px;
+    margin: 24px;
+}
+
+.categories-title {
+    margin: 24px;
+}
+
+.cart {
+background: #1b1f27;
+width: 450px;
+}
+
+.btn {
+    margin: 24px;
+}
+
+.offcanvas-title {
+    color:#bbbcbf;
+}
+
+.offcanvas-body {
+    color:#bbbcbf;
+}
+
+.final {
+    margin: 0px;
+    width: 100%;
+    background-color: var( --color-light-gray);
+}
+
+
