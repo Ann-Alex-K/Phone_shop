@@ -67,5 +67,11 @@ width: 450px;
     width: 100%;
     background-color: var( --color-light-gray);
 }
+.header{
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    background-color:#1b1f27;
+}
 
 
