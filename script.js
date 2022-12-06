@@ -1,4 +1,3 @@
-
 window.onload = () => {
     getData();
 }
@@ -6,28 +5,28 @@ window.onload = () => {
 let products = [];
 
 function getData() {
-axios.get('https://dh.cubicle.53xapps.com/products').then((responce) => {
-    products = responce.data;
-    products.splice(0, 19);
-    render(products)
-})
+    axios.get('https://dh.cubicle.53xapps.com/products').then((responce) => {
+        products = responce.data;
+        products.splice(0, 19);
+        render(products)
+    })
 }
 
-function render(list){
+function render(list) {
 
-    const blocks  = document.querySelector('.blocks');
+    const blocks = document.querySelector('.blocks');
     blocks.innerHTML = '';
 
     const fragment = document.createDocumentFragment();
-  
-    for (let product of list) { 
-       
+
+    for (let product of list) {
+
 
         const block = document.createElement('div');
 
         block.className = 'block text-center text-white-50 shadow';
 
-        
+
 
         const html = `
         <div class="block">
@@ -43,49 +42,49 @@ function render(list){
         </svg></button>
       </div>
       `
-      
+
         block.innerHTML = html;
-        
+
 
         fragment.appendChild(block)
     }
 
     blocks.appendChild(fragment);
-    
+
 }
 
 let cart = JSON.parse(localStorage.getItem("CART")) || [];
 updateCart();
 
 function addToCart(id) {
-    if(cart.some((item) => item.id === id)){
+    if (cart.some((item) => item.id === id)) {
         changeCount("addTocart", id);
     } else {
         const item = products.find((product) => product.id === id)
 
         cart.push({
-            ...item, 
+            ...item,
             count: 1
-        }); 
+        });
     }
-  updateCart();
+    updateCart();
 }
 
-function updateCart(){
+function updateCart() {
     renderCartItems(cart)
     renderTotal()
 
     localStorage.setItem("CART", JSON.stringify(cart))
 }
 
-function renderCartItems(list){
+function renderCartItems(list) {
     const cartList = document.getElementById('cartList');
     cartList.innerHTML = '';
     for (let product of list) {
-    const cartRow = document.createElement('tr');
-        
-  
-      const addHtml = `
+        const cartRow = document.createElement('tr');
+
+
+        const addHtml = `
               <th scope="row" width="60%">${product.title}</th>
               <td scope="row" width="10%">${product.price + '₽'}</td>
               <td scope="row"width="20%">
@@ -100,42 +99,43 @@ function renderCartItems(list){
             </svg></td>
                <td width="10%">  <button type="button" class="btn-close"  onclick="delFromCart(${product.id})"></button></td>
               `
-  //
-                cartRow.innerHTML += addHtml;
-                cartList.appendChild(cartRow);
+        //
+        cartRow.innerHTML += addHtml;
+        cartList.appendChild(cartRow);
 
+    }
 }
-}
 
-function delFromCart(id){
-cart = cart.filter((item) => item.id !== id);
+function delFromCart(id) {
+    cart = cart.filter((item) => item.id !== id);
 
- updateCart();
+    updateCart();
 }
 
 function changeCount(action, id) {
- cart = cart.map ((item) => {
+    cart = cart.map((item) => {
         let count = item.count;
 
-     if (item.id === id) {
-        if (action === "delTocart" && item.count !== 0) {
-            count--;
-        } else if (action === "addTocart") {
-            count++;
+        if (item.id === id) {
+            if (action === "delTocart" && item.count !== 0) {
+                count--;
+            } else if (action === "addTocart") {
+                count++;
+            }
         }
-     }
-     
-    return {
-        ...item, 
-        count,
-    };
+
+        return {
+            ...item,
+            count,
+        };
     })
     updateCart();
 }
 
 function renderTotal() {
     const total = document.querySelector('.subTotal');
-    let totalPrice = 0, totalItems = 0;
+    let totalPrice = 0,
+        totalItems = 0;
 
     cart.forEach((item) => {
         totalPrice += item.price * item.count;
@@ -151,40 +151,39 @@ const dropdown = document.querySelector('.dropdown-menu');
 
 dropdown.addEventListener('click', (e) => {
 
-const child = [...dropdown.children];
-child.forEach(el => {
-    el.firstChild.classList.remove('active');
-});
+    const child = [...dropdown.children];
+    child.forEach(el => {
+        el.firstChild.classList.remove('active');
+    });
 
 
     e.target.classList.add('active');
     const category = e.target.dataset.type;
 
-   const dropdownTitle = document.getElementById('navDropdown');
+    const dropdownTitle = document.getElementById('navDropdown');
 
-    if (category === 'all')  
-    dropdownTitle.textContent = 'Все товары'
+    if (category === 'all')
+        dropdownTitle.textContent = 'Все товары'
 
-    if (category === '1')  
-    dropdownTitle.textContent = 'Apple'
+    if (category === '1')
+        dropdownTitle.textContent = 'Apple'
 
-    if (category === '2')  
-    dropdownTitle.textContent = 'HONOR'
+    if (category === '2')
+        dropdownTitle.textContent = 'HONOR'
 
-    if (category === '3')  
-    dropdownTitle.textContent = 'Xiaomi'
+    if (category === '3')
+        dropdownTitle.textContent = 'Xiaomi'
 
-    if (category === '4')  
-    dropdownTitle.textContent = 'Samsung'
+    if (category === '4')
+        dropdownTitle.textContent = 'Samsung'
 
     filterProducts(category)
 })
 
-function filterProducts (category) {
+function filterProducts(category) {
     const filterCategory = products.filter(product => {
-      //  return product.category_id == category || category === 'all'; фильтр по категории
-     return product.brand_id == category || category === 'all'; //фильтр по бренду
+        //  return product.category_id == category || category === 'all'; фильтр по категории
+        return product.brand_id == category || category === 'all'; //фильтр по бренду
     })
     render(filterCategory)
 }
-
