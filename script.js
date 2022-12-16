@@ -182,8 +182,7 @@ dropdown.addEventListener('click', (e) => {
 
 function filterProducts(category) {
     const filterCategory = products.filter(product => {
-        //  return product.category_id == category || category === 'all'; фильтр по категории
-        return product.brand_id == category || category === 'all'; //фильтр по бренду
+        return product.brand_id == category || category === 'all'; 
     })
     render(filterCategory)
 }
