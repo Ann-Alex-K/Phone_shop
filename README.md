@@ -1,6 +1,8 @@
 # Phone shop
 
+## See the interactive example of the project:
 
+https://ann-alex-k.github.io/Phone_shop/
 
 ## Getting started
 
