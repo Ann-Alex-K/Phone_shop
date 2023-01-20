@@ -1,4 +1,4 @@
-# Phone shop
+# Phone store
 
 ## See the interactive example of the project:
 
